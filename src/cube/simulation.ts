@@ -6,6 +6,7 @@ export enum TurnType {
   Clockwise,
   CounterClockwise,
   Double,
+  None,
 }
 
 // Given sticker N return sticker number after rotation
@@ -299,6 +300,10 @@ export class CubeData {
   }
 
   turn(turn: Turn) {
+    if (turn.turnType === TurnType.None) {
+      return
+    }
+
     let slices = this.safeSlices(turn.slices)
     switch (turn.move) {
       case AlgorithmUnit.F:

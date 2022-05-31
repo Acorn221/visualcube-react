@@ -5,7 +5,7 @@ exports.parseCase = exports.parseAlgorithm = void 0;
 var constants_1 = require("./../constants");
 var simulation_1 = require("../simulation");
 var constants_2 = require("../constants");
-var turnRegex = /([2-9]+)?([UuFfRrDdLlBbMESxyz])(w)?(2\'|\'2|2|\')?/g;
+var turnRegex = /([2-9]+)?([UuFfRrDdLlBbMESxyz])(w)?(\d+\'|\'\d+|\d+|\')?/g;
 var Opposite = (_a = {},
     _a[simulation_1.TurnType.Clockwise] = simulation_1.TurnType.CounterClockwise,
     _a[simulation_1.TurnType.CounterClockwise] = simulation_1.TurnType.Clockwise,
@@ -90,6 +90,30 @@ function getTurnType(rawType) {
         case constants_2.TurnAbbreviation.DoubleCounter2:
             return simulation_1.TurnType.Double;
         default:
-            throw new Error("Invalid move modifier (" + rawType + ")");
+            // Attempt to parse non standard turn type
+            // (for invalid but reasonable moves like "y3")
+            var reversed = false;
+            if (rawType.charAt(0) === "'") {
+                reversed = true;
+                rawType = rawType.substring(1, rawType.length);
+            }
+            else if (rawType.charAt(rawType.length - 1) === "'") {
+                reversed = true;
+            }
+            var turns = parseInt(rawType) % 4;
+            if (isNaN(turns)) {
+                throw new Error("Invalid move modifier (" + rawType + ")");
+            }
+            if (turns === 0) {
+                return simulation_1.TurnType.None;
+            }
+            if (turns === 3) {
+                reversed = !reversed;
+                turns = 1;
+            }
+            if (turns == 2) {
+                return simulation_1.TurnType.Double;
+            }
+            return reversed ? simulation_1.TurnType.CounterClockwise : simulation_1.TurnType.Clockwise;
     }
 }

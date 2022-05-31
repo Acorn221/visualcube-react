@@ -8,7 +8,7 @@ export interface Turn {
   slices: number
 }
 
-const turnRegex = /([2-9]+)?([UuFfRrDdLlBbMESxyz])(w)?(2\'|\'2|2|\')?/g
+const turnRegex = /([2-9]+)?([UuFfRrDdLlBbMESxyz])(w)?(\d+\'|\'\d+|\d+|\')?/g
 
 const Opposite = {
   [TurnType.Clockwise]: TurnType.CounterClockwise,
@@ -96,6 +96,35 @@ function getTurnType(rawType: string): TurnType {
     case TurnAbbreviation.DoubleCounter2:
       return TurnType.Double
     default:
-      throw new Error(`Invalid move modifier (${rawType})`)
+      // Attempt to parse non standard turn type
+      // (for invalid but reasonable moves like "y3")
+      let reversed = false
+      if (rawType.charAt(0) === "'") {
+        reversed = true
+        rawType = rawType.substring(1, rawType.length)
+      } else if (rawType.charAt(rawType.length - 1) === "'") {
+        reversed = true
+      }
+
+      let turns = parseInt(rawType) % 4
+
+      if (isNaN(turns)) {
+        throw new Error(`Invalid move modifier (${rawType})`)
+      }
+
+      if (turns === 0) {
+        return TurnType.None
+      }
+
+      if (turns === 3) {
+        reversed = !reversed
+        turns = 1
+      }
+
+      if (turns == 2) {
+        return TurnType.Double
+      }
+
+      return reversed ? TurnType.CounterClockwise : TurnType.Clockwise
   }
 }

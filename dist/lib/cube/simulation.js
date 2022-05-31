@@ -9,6 +9,7 @@ var TurnType;
     TurnType[TurnType["Clockwise"] = 0] = "Clockwise";
     TurnType[TurnType["CounterClockwise"] = 1] = "CounterClockwise";
     TurnType[TurnType["Double"] = 2] = "Double";
+    TurnType[TurnType["None"] = 3] = "None";
 })(TurnType = exports.TurnType || (exports.TurnType = {}));
 var faceIdentity = function (stickerNumber, cubeSize) { return stickerNumber; };
 var counterClockwiseSticker = function (stickerNumber, cubeSize) {
@@ -280,6 +281,9 @@ var CubeData = /** @class */ (function () {
         this.zLayersRotation(0, turnType === TurnType.Clockwise, turnType === TurnType.Double, this.cubeSize);
     };
     CubeData.prototype.turn = function (turn) {
+        if (turn.turnType === TurnType.None) {
+            return;
+        }
         var slices = this.safeSlices(turn.slices);
         switch (turn.move) {
             case constants_1.AlgorithmUnit.F:

@@ -2,7 +2,8 @@ import { Turn } from './parsing/algorithm';
 export declare enum TurnType {
     Clockwise = 0,
     CounterClockwise = 1,
-    Double = 2
+    Double = 2,
+    None = 3
 }
 export declare class CubeData {
     private cubeSize;
