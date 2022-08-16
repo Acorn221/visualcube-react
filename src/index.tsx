@@ -88,10 +88,5 @@ export const VisualCube =  ({options}: VisualCubeProps) => {
   }, [options]);
 
   
-  return (
-    <div>
-      <h1>hi</h1>
-      <div ref={container} />
-    </div>
-  )
+  return (<div ref={container} />);
 };
