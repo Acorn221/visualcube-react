@@ -1,5 +1,4 @@
 import { ColorCode } from './../../colors'
-import { StickerDefinition } from '../models/sticker'
 import { Arrow } from '../models/arrow'
 import { Face } from '../constants'
 import { parseColor } from './color'
