@@ -1,12 +1,12 @@
-import { ColorCode, ColorName } from './../colors'
-import { FaceletToFace, FaceletDefinition, FaceletToColor } from './../constants'
-import SVG from 'svg.js'
-import { CubeGeometry, FaceStickers, FaceRotations, rotateFaces } from './geometry'
-import { Vec3, transScale, scale, translate, radians2Degrees } from '../math'
-import { Face, AllFaces } from './constants'
-import { ICubeOptionsComplete } from './options'
-import { Arrow } from './models/arrow'
-import { parseArrows } from './parsing/arrow'
+import { ColorCode, ColorName } from './../colors';
+import { FaceletToFace, FaceletToColor } from './../constants';
+import SVG from 'svg.js';
+import { CubeGeometry, FaceStickers, FaceRotations, rotateFaces } from './geometry';
+import { Vec3, transScale, scale, translate, radians2Degrees } from '../math';
+import { Face, AllFaces } from './constants';
+import { ICubeOptionsComplete } from './options';
+import { Arrow } from './models/arrow';
+import { parseArrows } from './parsing/arrow';
 
 /**
  * Utility methods for rendering cube geometry using svg.js
@@ -20,7 +20,7 @@ const defaultFaceRotations: FaceRotations = {
   [Face.D]: [0, 1, 0],
   [Face.L]: [-1, 0, 0],
   [Face.B]: [0, 0, 1],
-}
+};
 
 export function renderCube(container: HTMLElement | string, geometry: CubeGeometry, options: ICubeOptionsComplete) {
   let faceRotations = rotateFaces(defaultFaceRotations, options.viewportRotations)
@@ -31,17 +31,19 @@ export function renderCube(container: HTMLElement | string, geometry: CubeGeomet
   let hiddenFaces = renderOrder.filter(face => !faceVisible(face, faceRotations))
   let visibleFaces = renderOrder.filter(face => faceVisible(face, faceRotations))
 
+  let cubeOutlineGroup: SVG.G;
+
   renderBackground(svg, options)
   // Render hidden faces if cube color has transparency
   if (options.cubeOpacity < 100) {
-    let cubeOutlineGroup = getCubeOutlineGroup(svg, options)
+    cubeOutlineGroup = getCubeOutlineGroup(svg, options)
     hiddenFaces.forEach(face => {
       renderFaceStickers(svg, face, geometry[face], options)
       renderCubeOutline(cubeOutlineGroup, geometry[face], options)
     })
   }
 
-  let cubeOutlineGroup = getCubeOutlineGroup(svg, options)
+  cubeOutlineGroup = getCubeOutlineGroup(svg, options)
   visibleFaces.forEach(face => {
     renderCubeOutline(cubeOutlineGroup, geometry[face], options)
     renderFaceStickers(svg, face, geometry[face], options)
@@ -65,7 +67,9 @@ export function renderCube(container: HTMLElement | string, geometry: CubeGeomet
 
   arrowDefinitions.forEach(arrow => {
     renderArrow(arrowGroup, geometry, arrow)
-  })
+  });
+
+  return svg;
 }
 
 /**
