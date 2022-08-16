@@ -1,6 +1,6 @@
 import { Face } from '../constants'
 
-export class StickerDefinition {
+export type StickerDefinition = {
   face: Face
   n: number
 }
