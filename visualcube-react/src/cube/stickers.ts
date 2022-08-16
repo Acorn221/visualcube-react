@@ -22,6 +22,7 @@ export function makeStickerColors(options: ICubeOptionsComplete): string[] {
 
   // Fill with color scheme if sticker colors not predefined.
   if (stickerColors.length === 0) {
+    // TODO: refactor, this is dodgy code
     stickerColors = [].concat.apply(
       [],
       AllFaces.map(face => {
