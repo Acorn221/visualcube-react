@@ -1,35 +1,34 @@
-import { ColorCode } from './../../colors'
-import { StickerDefinition } from '../models/sticker'
-import { Arrow } from '../models/arrow'
-import { Face } from '../constants'
-import { parseColor } from './color'
+import { ColorCode } from './../../colors';
+import { Arrow } from '../models/arrow';
+import { Face } from '../constants';
+import { parseColor } from './color';
 
-const stickerPattern = '([URFDLB])([0-9]+)'
+const stickerPattern = '([URFDLB])([0-9]+)';
 const colorPattern =
-  '(black|dgrey|grey|silver|white|yellow|red|orange|blue|green|purple|pink|[0-9a-fA-F]{6}|[0-9a-fA-F]{3})'
-const arrowPattern = `^(${stickerPattern})(${stickerPattern})(${stickerPattern})?(-s([0-9+]))?(-i([0-9+]))?(-${colorPattern})?`
+  '(black|dgrey|grey|silver|white|yellow|red|orange|blue|green|purple|pink|[0-9a-fA-F]{6}|[0-9a-fA-F]{3})';
+const arrowPattern = `^(${stickerPattern})(${stickerPattern})(${stickerPattern})?(-s([0-9+]))?(-i([0-9+]))?(-${colorPattern})?`;
 
 export function parseArrows(raw: string): Arrow[] {
   if (typeof raw !== 'string') {
-    return []
+    return [];
   }
 
   return raw
     .split(',')
-    .map(part => parseArrow(part))
-    .filter(arrow => !!arrow)
+    .map((part) => parseArrow(part))
+    .filter((arrow) => !!arrow);
 }
 
 export function parseArrow(raw: string): Arrow {
   if (typeof raw !== 'string') {
-    return null
+    return null;
   }
 
-  let arrowRegex = new RegExp(arrowPattern)
-  let match = arrowRegex.exec(raw)
+  let arrowRegex = new RegExp(arrowPattern);
+  let match = arrowRegex.exec(raw);
 
   if (!match) {
-    return null
+    return null;
   }
 
   return <Arrow>{
@@ -50,5 +49,5 @@ export function parseArrow(raw: string): Arrow {
     color: match[15] ? parseColor(match[15]) : ColorCode.Gray,
     scale: match[11] ? parseInt(match[11]) : 10,
     influence: match[13] ? parseInt(match[13]) : 10,
-  }
+  };
 }
