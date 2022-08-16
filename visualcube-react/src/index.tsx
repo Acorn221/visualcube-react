@@ -1,12 +1,11 @@
-import React, { FC, HTMLAttributes, ReactChild, useState } from 'react';
+import React, { HTMLAttributes, useLayoutEffect, useRef } from 'react';
 
-import { ICubeColorScheme } from './cube/models/color-scheme'
 import { ColorName } from './colors'
 import { makeCubeGeometry } from './cube/geometry'
 import { Axis } from './math'
 import { renderCube } from './cube/drawing'
-import { ICubeOptions } from './cube/options'
-import { DefaultColorScheme, Masking as M } from './cube/constants'
+import { ICubeOptions, ICubeOptionsComplete } from './cube/options'
+import { DefaultColorScheme } from './cube/constants'
 import { makeStickerColors } from './cube/stickers'
 import { parseOptions } from './cube/parsing/options'
 import { parseFaceletDefinitions } from './cube/parsing/faceletDefinitions'
@@ -17,7 +16,7 @@ export { StickerDefinition } from './cube/models/sticker'
 export { Arrow } from './cube/models/arrow'
 export { ICubeOptions } from './cube/options'
 
-const defaultOptions: ICubeOptions = {
+const defaultOptions: ICubeOptionsComplete = {
   cubeSize: 3,
   width: 128,
   height: 128,
@@ -48,7 +47,7 @@ export function cubeSVG(container: HTMLElement | string, extraOptions?: ICubeOpt
   return renderCube(container, geomety, options)
 }
 
-const getOptions = (baseOptions: ICubeOptions, extraOptions: string | ICubeOptions): ICubeOptions => {
+const getOptions = (baseOptions: ICubeOptions, extraOptions: string | ICubeOptions): ICubeOptionsComplete => {
   let parsedOptions: ICubeOptions
   if (typeof extraOptions === 'string') {
     parsedOptions = parseOptions(extraOptions)
@@ -60,6 +59,7 @@ const getOptions = (baseOptions: ICubeOptions, extraOptions: string | ICubeOptio
     parsedOptions.facelets = parseFaceletDefinitions(parsedOptions.facelets)
   }
 
+  // @ts-ignore: This is valid because we know that the type of baseOptions is ICubeOptionsComplete
   return { ...baseOptions, ...parsedOptions }
 }
 
@@ -76,17 +76,19 @@ export interface VisualCubeProps extends HTMLAttributes<HTMLDivElement> {
  */
 // : FC<VisualCubeProps> 
 export const VisualCube =  ({options}: VisualCubeProps) => {
-  const [svgData, setSvgData] = useState<string>();
+  //const [svgData, setSVGData] = useState<svgjs.Doc>();
+  const container = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    cubeSVG
-    });
+
+  useLayoutEffect(() => {
+      if(container.current !== null) cubeSVG(container.current, options);
   }, [options]);
 
+  
   return (
     <div>
       <h1>hi</h1>
-      <img src={`data:image/svg+xml;base64,${buffer && buffer.toString('base64')}`} />
+      <div ref={container} />
     </div>
   )
 };
