@@ -1,7 +1,7 @@
-var path = require('path');
+const path = require('path');
 const TerserPlugin = require("terser-webpack-plugin");
 
-var config = {
+const config = {
   mode: "production",
   entry: __dirname + "/src/index.ts",
   devtool: "source-map",
