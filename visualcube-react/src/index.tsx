@@ -81,7 +81,10 @@ export const VisualCube =  ({options}: VisualCubeProps) => {
 
 
   useLayoutEffect(() => {
-      if(container.current !== null) cubeSVG(container.current, options);
+      if(container.current !== null) {
+        container.current.innerHTML = '';
+        cubeSVG(container.current, options);
+      }
   }, [options]);
 
   

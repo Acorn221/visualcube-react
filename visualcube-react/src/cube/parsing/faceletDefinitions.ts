@@ -1,9 +1,12 @@
-import { FaceletDefinition, FaceletAbbreviateToDefinition } from '../../constants'
+import {
+  FaceletDefinition,
+  FaceletAbbreviateToDefinition,
+} from '../../constants';
 
 export function parseFaceletDefinitions(rawValue: string): FaceletDefinition[] {
-  let colors = []
+  let colors = [];
   for (let i = 0; i < rawValue.length; i++) {
-    colors.push(FaceletAbbreviateToDefinition[rawValue.charAt(i)])
+    colors.push(FaceletAbbreviateToDefinition[rawValue.charAt(i)]);
   }
-  return colors
+  return colors;
 }
