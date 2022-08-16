@@ -1,6 +1,9 @@
 import { Masking, Face, AllFaces } from './constants';
 
-export type FaceValues = { [face: number]: any[] };
+export type FaceValues = { 
+  [face: number]: any[] 
+};
+
 type MaskingFunctions = {
   [masking: string]: {
     [face: number]: (row: number, col: number, cubeSize: number) => boolean;
@@ -225,7 +228,7 @@ export function makeMasking(masking: Masking, cubeSize: number): FaceValues {
   }
 
   let numStickers = cubeSize * cubeSize;
-  let faceValues = {
+  let faceValues: FaceValues = {
     [Face.U]: [],
     [Face.F]: [],
     [Face.R]: [],
