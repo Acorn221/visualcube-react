@@ -1,12 +1,13 @@
 import { ColorName, ColorCode } from './../colors'
-import { ICubeOptions } from './options'
+import { ICubeOptionsComplete } from './options'
 import { makeMasking } from './masking'
 import { CubeData } from './simulation'
 import { parseAlgorithm, parseCase, Turn } from './parsing/algorithm'
 import { AllFaces } from './constants'
 
-export function makeStickerColors(options: ICubeOptions): string[] {
-  let stickerColors = options.stickerColors
+// TODO: Cognitive Complexity is 25, needs to be reduced!
+export function makeStickerColors(options: ICubeOptionsComplete): string[] {
+  let stickerColors: string[] = options.stickerColors || [];
   let mask = options.mask ? makeMasking(options.mask, options.cubeSize) : null
   let maskColor = typeof options.maskColor == 'string' ? options.maskColor : ColorCode.DarkGray
 
@@ -20,7 +21,7 @@ export function makeStickerColors(options: ICubeOptions): string[] {
   }
 
   // Fill with color scheme if sticker colors not predefined.
-  if (!stickerColors) {
+  if (stickerColors.length === 0) {
     stickerColors = [].concat.apply(
       [],
       AllFaces.map(face => {
