@@ -10,11 +10,12 @@ export enum Axis {
   Z = 2,
 }
 
-export function makeMatrix(rows: number, cols: number): null[][] {
-  let matrix: null[][] = []
+export function makeMatrix<T>(rows: number, cols: number): T[][] {
+  let matrix: T[][] = []
   for (let r = 0; r < rows; r++) {
     matrix[r] = []
     for (let c = 0; c < cols; c++) {
+      // @ts-ignore
       matrix[r][c] = null
     }
   }
