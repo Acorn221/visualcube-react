@@ -1,5 +1,3 @@
-import React, { FC, HTMLAttributes, ReactChild, useState } from 'react';
-
 import { ICubeColorScheme } from './cube/models/color-scheme'
 import { ColorName } from './colors'
 import { makeCubeGeometry } from './cube/geometry'
@@ -45,10 +43,10 @@ export function cubeSVG(container: HTMLElement | string, extraOptions?: ICubeOpt
   let geomety = makeCubeGeometry(options)
   options.stickerColors = makeStickerColors(options)
 
-  return renderCube(container, geomety, options)
+  renderCube(container, geomety, options)
 }
 
-const getOptions = (baseOptions: ICubeOptions, extraOptions: string | ICubeOptions): ICubeOptions => {
+function getOptions(baseOptions: ICubeOptions, extraOptions: string | ICubeOptions): ICubeOptions {
   let parsedOptions: ICubeOptions
   if (typeof extraOptions === 'string') {
     parsedOptions = parseOptions(extraOptions)
@@ -62,31 +60,3 @@ const getOptions = (baseOptions: ICubeOptions, extraOptions: string | ICubeOptio
 
   return { ...baseOptions, ...parsedOptions }
 }
-
-
-export interface VisualCubeProps extends HTMLAttributes<HTMLDivElement> {
-  /** custom content, defaults to 'the snozzberries taste like snozzberries' */
-  options: ICubeOptions;
-}
-
-// Please do not use types off of a default export module or else Storybook Docs will suffer.
-// see: https://github.com/storybookjs/storybook/issues/9556
-/**
- * A custom Thing component. Neat!
- */
-// : FC<VisualCubeProps> 
-export const VisualCube =  ({options}: VisualCubeProps) => {
-  const [svgData, setSvgData] = useState<string>();
-
-  useEffect(() => {
-    cubeSVG
-    });
-  }, [options]);
-
-  return (
-    <div>
-      <h1>hi</h1>
-      <img src={`data:image/svg+xml;base64,${buffer && buffer.toString('base64')}`} />
-    </div>
-  )
-};
