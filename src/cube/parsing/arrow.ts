@@ -16,10 +16,12 @@ export function parseArrows(raw: string): Arrow[] {
   return raw
     .split(',')
     .map((part) => parseArrow(part))
-    .filter((arrow) => !!arrow);
+    .filter((a): a is Arrow => {
+      return a instanceof Arrow;
+  });
 }
 
-export function parseArrow(raw: string): Arrow {
+export function parseArrow(raw: string): Arrow | null {
   if (typeof raw !== 'string') {
     return null;
   }
