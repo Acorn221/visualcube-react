@@ -36,7 +36,7 @@ const defaultOptions: ICubeOptionsComplete = {
   },
 }
 
-export function cubeSVG(container: HTMLElement | string, extraOptions?: ICubeOptions) {
+export function cubeSVG(container: HTMLElement | string, extraOptions?: ICubeOptions | string) {
   if (extraOptions === void 0) {
     extraOptions = {}
   }
