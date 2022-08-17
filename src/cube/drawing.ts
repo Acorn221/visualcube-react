@@ -27,11 +27,11 @@ const defaultFaceRotations: FaceRotations = {
   [Face.B]: [0, 0, 1],
 };
 
-export function renderCube(
+export const renderCube = (
   container: HTMLElement | string,
   geometry: CubeGeometry,
   options: ICubeOptionsComplete
-) {
+) => {
   let faceRotations = rotateFaces(
     defaultFaceRotations,
     options.viewportRotations
@@ -97,14 +97,13 @@ export function renderCube(
  * Determines face render order based on z position. Faces further away
  * will render first so anything closer will be drawn on top.
  */
-function getRenderOrder(faceRotations: FaceRotations): Face[] {
-  let renderOrder = [...AllFaces].sort((a: Face, b: Face) => {
+const getRenderOrder = (faceRotations: FaceRotations): Face[] => {
+  return [...AllFaces].sort((a: Face, b: Face) => {
     return faceRotations[b][2] - faceRotations[a][2];
   });
-  return renderOrder;
 }
 
-function renderBackground(svg: SVG.Doc, options: ICubeOptionsComplete) {
+const renderBackground = (svg: SVG.Doc, options: ICubeOptionsComplete) => {
   let backgroundSvg = svg.rect(options.viewbox.width, options.viewbox.height);
   backgroundSvg.x(options.viewbox.x);
   backgroundSvg.y(options.viewbox.y);
