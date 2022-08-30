@@ -54,6 +54,7 @@
     "@storybook/react": "^6.5.10",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.33.1",
     "babel-loader": "^8.2.5",
     "eslint": "^8.22.0",
@@ -111,6 +112,7 @@
           "unnamedComponents": "arrow-function"
         }
       ],
+      "prefer-arrow-callback": 2,
       "linebreak-style": 0,
       "no-plusplus": 0,
       "no-tabs": [
