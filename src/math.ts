@@ -30,7 +30,9 @@ export function scale(pos: Vec3, scalar: number): Vec3 {
   return pos.map((v) => v * scalar) as Vec3;
 }
 
-// Scale a point relative to position vector
+/**
+ * Scale a point relative to position vector
+ */ 
 export function transScale(pos: Vec3, v: Vec3, scalar: number): Vec3 {
   // Translate each facelet to cf
   let iv: Vec3 = v.map((x) => -x) as Vec3;
@@ -64,6 +66,9 @@ export function project(pos: Vec3, d: number): Vec3 {
   ];
 }
 
+/**
+ * Converts radians to degrees
+ */
 export function radians2Degrees(radians: number) {
   return (radians * 180) / Math.PI;
 }

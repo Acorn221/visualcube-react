@@ -3,6 +3,9 @@ import { Arrow } from './models/arrow';
 import { Masking } from './constants';
 import { FaceletDefinition } from '../constants';
 
+/**
+ * Options for the cube, so the input can be simplified and the rest can be filled in with defaults.
+ */
 export interface ICubeOptions {
   dist?: number;
   algorithm?: string;
@@ -33,7 +36,10 @@ export interface ICubeOptions {
     height: number;
   };
 }
-
+/**
+ * The options for the cube.
+ * This has all the options required to create the cube.
+ */
 export interface ICubeOptionsComplete {
   cubeSize: number;
   width: number;

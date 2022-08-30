@@ -36,6 +36,13 @@ const defaultOptions: ICubeOptionsComplete = {
   },
 }
 
+/**
+ * This is the main method called to render a cube.
+ * It takes in the incomplete options and fills the rest in.
+ * 
+ * @param container The container to render the cube in
+ * @param extraOptions The string support is here for backwards compatibility.
+ */
 export function cubeSVG(container: HTMLElement | string, extraOptions?: ICubeOptions | string) {
   if (extraOptions === void 0) {
     extraOptions = {}
@@ -60,7 +67,7 @@ const getOptions = (baseOptions: ICubeOptions, extraOptions: string | ICubeOptio
   }
 
   // @ts-ignore: This is valid because we know that the type of baseOptions is ICubeOptionsComplete
-  return { ...baseOptions, ...parsedOptions }
+  return { ...baseOptions, ...parsedOptions };
 }
 
 
@@ -71,10 +78,12 @@ export interface VisualCubeProps extends HTMLAttributes<HTMLDivElement> {
 
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
+
 /**
- * A custom Thing component. Neat!
+ * Returns the react component for the visual cube.
+ * 
+ * @returns 
  */
-// : FC<VisualCubeProps> 
 export const VisualCube =  ({options}: VisualCubeProps) => {
   //const [svgData, setSVGData] = useState<svgjs.Doc>();
   const container = useRef<HTMLDivElement>(null);
