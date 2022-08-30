@@ -11,7 +11,7 @@ export enum Axis {
 }
 
 export function makeMatrix<T>(rows: number, cols: number): T[][] {
-  let matrix: T[][] = [];
+  const matrix: T[][] = [];
   for (let r = 0; r < rows; r++) {
     matrix[r] = [];
     for (let c = 0; c < cols; c++) {
@@ -32,15 +32,15 @@ export function scale(pos: Vec3, scalar: number): Vec3 {
 
 /**
  * Scale a point relative to position vector
- */ 
+ */
 export function transScale(pos: Vec3, v: Vec3, scalar: number): Vec3 {
   // Translate each facelet to cf
-  let iv: Vec3 = v.map((x) => -x) as Vec3;
+  const iv: Vec3 = v.map((x) => -x) as Vec3;
   return translate(scale(translate(pos, iv), scalar), v);
 }
 
 export function rotate(pos: Vec3, axis: Axis, radians: number): Vec3 {
-  let newPosition: Vec3 = [...pos] as Vec3;
+  const newPosition: Vec3 = [...pos] as Vec3;
   switch (axis) {
     case Axis.X:
       newPosition[2] = pos[2] * Math.cos(radians) - pos[1] * Math.sin(radians);

@@ -1,4 +1,4 @@
-import { Axis } from './../math';
+import { Axis } from '../math';
 import { Arrow } from './models/arrow';
 import { Masking } from './constants';
 import { FaceletDefinition } from '../constants';

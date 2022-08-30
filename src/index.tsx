@@ -1,20 +1,20 @@
 import React, { HTMLAttributes, useLayoutEffect, useRef } from 'react';
 
-import { ColorName } from './colors'
-import { makeCubeGeometry } from './cube/geometry'
-import { Axis } from './math'
-import { renderCube } from './cube/drawing'
-import { ICubeOptions, ICubeOptionsComplete } from './cube/options'
-import { DefaultColorScheme } from './cube/constants'
-import { makeStickerColors } from './cube/stickers'
-import { parseOptions } from './cube/parsing/options'
-import { parseFaceletDefinitions } from './cube/parsing/faceletDefinitions'
+import { ColorName } from './colors';
+import { makeCubeGeometry } from './cube/geometry';
+import { Axis } from './math';
+import { renderCube } from './cube/drawing';
+import { ICubeOptions, ICubeOptionsComplete } from './cube/options';
+import { DefaultColorScheme } from './cube/constants';
+import { makeStickerColors } from './cube/stickers';
+import { parseOptions } from './cube/parsing/options';
+import { parseFaceletDefinitions } from './cube/parsing/faceletDefinitions';
 
-export { Masking, Face } from './cube/constants'
-export { Axis } from './math'
-export { StickerDefinition } from './cube/models/sticker'
-export { Arrow } from './cube/models/arrow'
-export { ICubeOptions } from './cube/options'
+export { Masking, Face } from './cube/constants';
+export { Axis } from './math';
+export { StickerDefinition } from './cube/models/sticker';
+export { Arrow } from './cube/models/arrow';
+export { ICubeOptions } from './cube/options';
 
 const defaultOptions: ICubeOptionsComplete = {
   cubeSize: 3,
@@ -34,42 +34,41 @@ const defaultOptions: ICubeOptionsComplete = {
     width: 1.8,
     height: 1.8,
   },
-}
+};
 
 /**
  * This is the main method called to render a cube.
  * It takes in the incomplete options and fills the rest in.
- * 
+ *
  * @param container The container to render the cube in
  * @param extraOptions The string support is here for backwards compatibility.
  */
 export function cubeSVG(container: HTMLElement | string, extraOptions?: ICubeOptions | string) {
   if (extraOptions === void 0) {
-    extraOptions = {}
+    extraOptions = {};
   }
-  let options = getOptions(defaultOptions, extraOptions)
-  let geomety = makeCubeGeometry(options)
-  options.stickerColors = makeStickerColors(options)
+  const options = getOptions(defaultOptions, extraOptions);
+  const geomety = makeCubeGeometry(options);
+  options.stickerColors = makeStickerColors(options);
 
-  return renderCube(container, geomety, options)
+  return renderCube(container, geomety, options);
 }
 
 const getOptions = (baseOptions: ICubeOptions, extraOptions: string | ICubeOptions): ICubeOptionsComplete => {
-  let parsedOptions: ICubeOptions
+  let parsedOptions: ICubeOptions;
   if (typeof extraOptions === 'string') {
-    parsedOptions = parseOptions(extraOptions)
+    parsedOptions = parseOptions(extraOptions);
   } else {
-    parsedOptions = extraOptions
+    parsedOptions = extraOptions;
   }
 
   if (typeof parsedOptions.facelets === 'string') {
-    parsedOptions.facelets = parseFaceletDefinitions(parsedOptions.facelets)
+    parsedOptions.facelets = parseFaceletDefinitions(parsedOptions.facelets);
   }
 
   // @ts-ignore: This is valid because we know that the type of baseOptions is ICubeOptionsComplete
   return { ...baseOptions, ...parsedOptions };
-}
-
+};
 
 export interface VisualCubeProps extends HTMLAttributes<HTMLDivElement> {
   /** custom content, defaults to 'the snozzberries taste like snozzberries' */
@@ -81,21 +80,19 @@ export interface VisualCubeProps extends HTMLAttributes<HTMLDivElement> {
 
 /**
  * Returns the react component for the visual cube.
- * 
- * @returns 
+ *
+ * @returns
  */
-export const VisualCube =  ({options}: VisualCubeProps) => {
-  //const [svgData, setSVGData] = useState<svgjs.Doc>();
+export const VisualCube = ({ options }: VisualCubeProps) => {
+  // const [svgData, setSVGData] = useState<svgjs.Doc>();
   const container = useRef<HTMLDivElement>(null);
 
-
   useLayoutEffect(() => {
-      if(container.current !== null) {
-        container.current.innerHTML = '';
-        cubeSVG(container.current, options);
-      }
+    if (container.current !== null) {
+      container.current.innerHTML = '';
+      cubeSVG(container.current, options);
+    }
   }, [options]);
 
-  
   return (<div ref={container} />);
 };

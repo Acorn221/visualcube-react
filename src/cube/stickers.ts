@@ -1,4 +1,4 @@
-import { ColorName, ColorCode } from './../colors';
+import { ColorName, ColorCode } from '../colors';
 import { ICubeOptionsComplete } from './options';
 import { makeMasking } from './masking';
 import { CubeData } from './simulation';
@@ -9,14 +9,13 @@ import { AllFaces } from './constants';
 export function makeStickerColors(options: ICubeOptionsComplete): string[] {
   let stickerColors: string[] = options.stickerColors || [];
   let mask = options.mask ? makeMasking(options.mask, options.cubeSize) : null;
-  let maskColor =
-    typeof options.maskColor == 'string'
-      ? options.maskColor
-      : ColorCode.DarkGray;
+  const maskColor = typeof options.maskColor === 'string'
+    ? options.maskColor
+    : ColorCode.DarkGray;
 
   if (mask && options.maskAlg) {
-    let maskCubeData = new CubeData(options.cubeSize, mask);
-    let alg = parseAlgorithm(options.maskAlg);
+    const maskCubeData = new CubeData(options.cubeSize, mask);
+    const alg = parseAlgorithm(options.maskAlg);
     alg.forEach((turn) => {
       maskCubeData.turn(turn);
     });
@@ -28,24 +27,21 @@ export function makeStickerColors(options: ICubeOptionsComplete): string[] {
     // TODO: refactor, this is dodgy code
     stickerColors = [].concat.apply(
       [],
-      AllFaces.map((face) => {
-        return Array.apply(
-          null,
-          Array(options.cubeSize * options.cubeSize)
-        ).map(() => options.colorScheme[face]);
-      })
+      AllFaces.map((face) => Array.apply(
+        null,
+        Array(options.cubeSize * options.cubeSize),
+      ).map(() => options.colorScheme[face])),
     );
   }
 
-  let faceMappedStickers = AllFaces.reduce((acc, face) => {
+  const faceMappedStickers = AllFaces.reduce((acc, face) => {
     if (!acc[face]) acc[face] = [];
 
     for (let i = 0; i < options.cubeSize; i++) {
       for (let j = 0; j < options.cubeSize; j++) {
         const faceIndex = AllFaces.indexOf(face);
         const stickerNumber = i * options.cubeSize + j;
-        const colorIndex =
-          faceIndex * (options.cubeSize * options.cubeSize) + stickerNumber;
+        const colorIndex = faceIndex * (options.cubeSize * options.cubeSize) + stickerNumber;
 
         if (stickerColors.length <= colorIndex) {
           acc[face][options.cubeSize * i + j] = ColorName.Black;
@@ -63,7 +59,7 @@ export function makeStickerColors(options: ICubeOptionsComplete): string[] {
   }, {});
 
   // Apply Algorithm
-  let cubeData = new CubeData(options.cubeSize, faceMappedStickers);
+  const cubeData = new CubeData(options.cubeSize, faceMappedStickers);
 
   let alg: Turn[] = [];
 
@@ -79,6 +75,6 @@ export function makeStickerColors(options: ICubeOptionsComplete): string[] {
 
   return [].concat.apply(
     [],
-    AllFaces.map((face) => cubeData.faces[face].slice())
+    AllFaces.map((face) => cubeData.faces[face].slice()),
   );
 }

@@ -1,5 +1,5 @@
-import { ColorCode } from './../colors';
-import { Axis } from './../math';
+import { ColorCode } from '../colors';
+import { Axis } from '../math';
 import { ICubeColorScheme } from './models/color-scheme';
 
 export enum Face {
@@ -15,10 +15,15 @@ export const AllFaces = [Face.U, Face.R, Face.F, Face.D, Face.L, Face.B];
 
 export class FaceRotationVectors {
   static U = [0, -1, 0];
+
   static R = [1, 0, 0];
+
   static F = [0, 0, -1];
+
   static D = [0, 1, 0];
+
   static L = [-1, 0, 0];
+
   static B = [0, 0, 1];
 }
 

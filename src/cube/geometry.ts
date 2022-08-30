@@ -27,7 +27,7 @@ export type FaceRotations = { [face: number]: Vec3 };
  */
 export function rotateFaces(
   faceRotations: FaceRotations,
-  rotations: [Axis, number][]
+  rotations: [Axis, number][],
 ): FaceRotations {
   return AllFaces.reduce((acc: FaceRotations, face) => {
     rotations.forEach((rotation) => {
@@ -44,7 +44,7 @@ export function makeStickerPosition(
   face: Face,
   cubeSize: number,
   x: number,
-  y: number
+  y: number,
 ): Vec3 {
   switch (face) {
     case Face.U:
@@ -69,11 +69,11 @@ export function makeStickerPosition(
  */
 export function makeFaceStickers(
   face: Face,
-  options: ICubeOptionsComplete
+  options: ICubeOptionsComplete,
 ): FaceStickers {
-  let stickers: Vec3[][] = makeMatrix<Vec3>(
+  const stickers: Vec3[][] = makeMatrix<Vec3>(
     options.cubeSize + 1,
-    options.cubeSize + 1
+    options.cubeSize + 1,
   );
 
   for (let row = 0; row <= options.cubeSize; row++) {
@@ -81,7 +81,7 @@ export function makeFaceStickers(
       let sticker = makeStickerPosition(face, options.cubeSize, row, col);
 
       // Now scale and tranform point to ensure size/pos independent of dim
-      let centerTranslation: Vec3 = [
+      const centerTranslation: Vec3 = [
         -options.cubeSize / 2,
         -options.cubeSize / 2,
         -options.cubeSize / 2,

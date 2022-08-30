@@ -9,17 +9,17 @@ import { parseFaceletDefinitions } from './faceletDefinitions';
  */
 
 export function parseOptions(rawOptions: string): ICubeOptions {
-  let options: ICubeOptions = {} as any;
-  let params = parseQuery(rawOptions);
+  const options: ICubeOptions = {} as any;
+  const params = parseQuery(rawOptions);
 
   Object.keys(params).forEach((key) => {
-    let paramValue = params[key];
+    const paramValue = params[key];
     switch (key) {
       case 'pzl':
         options.cubeSize = parseInt(paramValue) || 3;
         break;
       case 'size':
-        let size = parseInt(paramValue) || 250;
+        const size = parseInt(paramValue) || 250;
         options.width = size;
         options.height = size;
         break;
@@ -75,12 +75,11 @@ export function parseOptions(rawOptions: string): ICubeOptions {
 }
 
 function parseQuery(url) {
-  let queryString =
-    url.indexOf('?') > -1 ? url.substr(url.indexOf('?') + 1) : url;
-  var query = {};
-  var pairs = queryString.split('&');
-  for (var i = 0; i < pairs.length; i++) {
-    var pair = pairs[i].split('=');
+  const queryString = url.indexOf('?') > -1 ? url.substr(url.indexOf('?') + 1) : url;
+  const query = {};
+  const pairs = queryString.split('&');
+  for (let i = 0; i < pairs.length; i++) {
+    const pair = pairs[i].split('=');
     query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
   }
   return query;

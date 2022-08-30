@@ -1,6 +1,7 @@
-import { cubeRotations } from './../constants';
+import {
+  cubeRotations, TurnAbbreviation, AlgorithmUnit, possibleMoves,
+} from '../constants';
 import { TurnType } from '../simulation';
-import { TurnAbbreviation, AlgorithmUnit, possibleMoves } from '../constants';
 
 export interface Turn {
   move: AlgorithmUnit;
@@ -27,24 +28,23 @@ export function parseAlgorithm(algorithm: string): Turn[] {
   if (!algorithm) {
     return [];
   }
-  let turns: Turn[] = [];
+  const turns: Turn[] = [];
   let match;
   do {
     match = turnRegex.exec(algorithm);
     if (match) {
-      let rawSlices: string = match[1];
+      const rawSlices: string = match[1];
       let rawFace: string = match[2];
-      let outerBlockIndicator = match[3];
-      let rawType = match[4] || TurnAbbreviation.Clockwise; // Default to clockwise
-      let isLowerCaseMove =
-        rawFace === rawFace.toLowerCase() &&
-        cubeRotations.indexOf(rawFace) === -1;
+      const outerBlockIndicator = match[3];
+      const rawType = match[4] || TurnAbbreviation.Clockwise; // Default to clockwise
+      const isLowerCaseMove = rawFace === rawFace.toLowerCase()
+        && cubeRotations.indexOf(rawFace) === -1;
 
       if (isLowerCaseMove) {
         rawFace = rawFace.toUpperCase();
       }
 
-      let turn: Turn = {
+      const turn: Turn = {
         move: getMove(rawFace),
         turnType: getTurnType(rawType),
         slices: isLowerCaseMove ? 2 : getSlices(rawSlices, outerBlockIndicator),
@@ -59,12 +59,10 @@ export function parseAlgorithm(algorithm: string): Turn[] {
 
 export function parseCase(algorithm: string): Turn[] {
   return parseAlgorithm(algorithm)
-    .map((turn) => {
-      return <Turn>{
-        turnType: Opposite[turn.turnType],
-        move: turn.move,
-        slices: turn.slices,
-      };
+    .map((turn) => <Turn>{
+      turnType: Opposite[turn.turnType],
+      move: turn.move,
+      slices: turn.slices,
     })
     .reverse();
 }
@@ -72,9 +70,9 @@ export function parseCase(algorithm: string): Turn[] {
 function getSlices(rawSlices, outerBlockIndicator): number {
   if (outerBlockIndicator && !rawSlices) {
     return 2;
-  } else if (!outerBlockIndicator && rawSlices) {
+  } if (!outerBlockIndicator && rawSlices) {
     throw new Error(
-      `Invalid move: Cannot specify num slices if outer block move indicator 'w' is not present`
+      'Invalid move: Cannot specify num slices if outer block move indicator \'w\' is not present',
     );
   } else if (!outerBlockIndicator && !rawSlices) {
     return 1;
@@ -86,7 +84,7 @@ function getSlices(rawSlices, outerBlockIndicator): number {
 function getMove(rawFace: string): AlgorithmUnit {
   if (possibleMoves.indexOf(rawFace) < 0) {
     throw new Error(
-      `Invalid move (${rawFace}): Possible turn faces are [U R F L D B M E S x y z]`
+      `Invalid move (${rawFace}): Possible turn faces are [U R F L D B M E S x y z]`,
     );
   } else return rawFace as AlgorithmUnit;
 }

@@ -1,7 +1,7 @@
 import { Masking, Face, AllFaces } from './constants';
 
-export type FaceValues = { 
-  [face: number]: any[] 
+export type FaceValues = {
+  [face: number]: any[]
 };
 
 type MaskingFunctions = {
@@ -36,22 +36,16 @@ const maskingFunctions: MaskingFunctions = {
     [Face.B]: (row, _col, _cubeSize) => row == 0,
   },
   [Masking.CLL]: {
-    [Face.U]: (row, col, cubeSize) =>
-      (row > 0 && col > 0 && row < cubeSize - 1 && col < cubeSize - 1) || // is center
-      ((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
+    [Face.U]: (row, col, cubeSize) => (row > 0 && col > 0 && row < cubeSize - 1 && col < cubeSize - 1) // is center
+      || ((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
     [Face.D]: (_row, _col, _cubeSize) => false,
-    [Face.R]: (row, col, cubeSize) =>
-      row == 0 && (col == 0 || col == cubeSize - 1),
-    [Face.L]: (row, col, cubeSize) =>
-      row == 0 && (col == 0 || col == cubeSize - 1),
-    [Face.F]: (row, col, cubeSize) =>
-      row == 0 && (col == 0 || col == cubeSize - 1),
-    [Face.B]: (row, col, cubeSize) =>
-      row == 0 && (col == 0 || col == cubeSize - 1),
+    [Face.R]: (row, col, cubeSize) => row == 0 && (col == 0 || col == cubeSize - 1),
+    [Face.L]: (row, col, cubeSize) => row == 0 && (col == 0 || col == cubeSize - 1),
+    [Face.F]: (row, col, cubeSize) => row == 0 && (col == 0 || col == cubeSize - 1),
+    [Face.B]: (row, col, cubeSize) => row == 0 && (col == 0 || col == cubeSize - 1),
   },
   [Masking.ELL]: {
-    [Face.U]: (row, col, cubeSize) =>
-      !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
+    [Face.U]: (row, col, cubeSize) => !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
     [Face.D]: (_row, _col, _cubeSize) => false,
     [Face.R]: (row, col, cubeSize) => row == 0 && col > 0 && col < cubeSize - 1,
     [Face.L]: (row, col, cubeSize) => row == 0 && col > 0 && col < cubeSize - 1,
@@ -67,9 +61,8 @@ const maskingFunctions: MaskingFunctions = {
     [Face.B]: (_row, _col, _cubeSize) => false,
   },
   [Masking.OCLL]: {
-    [Face.U]: (row, col, cubeSize) =>
-      (row > 0 && col > 0 && row < cubeSize - 1 && col < cubeSize - 1) || // is center
-      ((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
+    [Face.U]: (row, col, cubeSize) => (row > 0 && col > 0 && row < cubeSize - 1 && col < cubeSize - 1) // is center
+      || ((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
     [Face.D]: (_row, _col, _cubeSize) => false,
     [Face.R]: (_row, _col, _cubeSize) => false,
     [Face.L]: (_row, _col, _cubeSize) => false,
@@ -77,8 +70,7 @@ const maskingFunctions: MaskingFunctions = {
     [Face.B]: (_row, _col, _cubeSize) => false,
   },
   [Masking.OELL]: {
-    [Face.U]: (row, col, cubeSize) =>
-      !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
+    [Face.U]: (row, col, cubeSize) => !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
     [Face.D]: (_row, _col, _cubeSize) => false,
     [Face.R]: (_row, _col, _cubeSize) => false,
     [Face.L]: (_row, _col, _cubeSize) => false,
@@ -88,14 +80,10 @@ const maskingFunctions: MaskingFunctions = {
   [Masking.COLL]: {
     [Face.U]: (_row, _col, _cubeSize) => true,
     [Face.D]: (_row, _col, _cubeSize) => false,
-    [Face.R]: (row, col, cubeSize) =>
-      row == 0 && (col == 0 || col == cubeSize - 1),
-    [Face.L]: (row, col, cubeSize) =>
-      row == 0 && (col == 0 || col == cubeSize - 1),
-    [Face.F]: (row, col, cubeSize) =>
-      row == 0 && (col == 0 || col == cubeSize - 1),
-    [Face.B]: (row, col, cubeSize) =>
-      row == 0 && (col == 0 || col == cubeSize - 1),
+    [Face.R]: (row, col, cubeSize) => row == 0 && (col == 0 || col == cubeSize - 1),
+    [Face.L]: (row, col, cubeSize) => row == 0 && (col == 0 || col == cubeSize - 1),
+    [Face.F]: (row, col, cubeSize) => row == 0 && (col == 0 || col == cubeSize - 1),
+    [Face.B]: (row, col, cubeSize) => row == 0 && (col == 0 || col == cubeSize - 1),
   },
   [Masking.OCELL]: {
     [Face.U]: (_row, _col, _cubeSize) => true,
@@ -114,8 +102,7 @@ const maskingFunctions: MaskingFunctions = {
     [Face.B]: (row, _col, _cubeSize) => row > 0,
   },
   [Masking.VH]: {
-    [Face.U]: (row, col, cubeSize) =>
-      !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
+    [Face.U]: (row, col, cubeSize) => !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
     [Face.D]: (_row, _col, _cubeSize) => true,
     [Face.R]: (row, _col, _cubeSize) => row > 0,
     [Face.L]: (row, _col, _cubeSize) => row > 0,
@@ -123,14 +110,11 @@ const maskingFunctions: MaskingFunctions = {
     [Face.B]: (row, _col, _cubeSize) => row > 0,
   },
   [Masking.ELS]: {
-    [Face.U]: (row, col, cubeSize) =>
-      !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
+    [Face.U]: (row, col, cubeSize) => !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
     [Face.D]: (row, col, cubeSize) => (row == 0 ? col < cubeSize - 1 : true),
-    [Face.R]: (row, col, cubeSize) =>
-      row > 0 && (row == cubeSize - 1 ? col > 0 : true),
+    [Face.R]: (row, col, cubeSize) => row > 0 && (row == cubeSize - 1 ? col > 0 : true),
     [Face.L]: (row, _col, _cubeSize) => row > 0,
-    [Face.F]: (row, col, cubeSize) =>
-      row > 0 && (row == cubeSize - 1 ? col < cubeSize - 1 : true),
+    [Face.F]: (row, col, cubeSize) => row > 0 && (row == cubeSize - 1 ? col < cubeSize - 1 : true),
     [Face.B]: (row, _col, _cubeSize) => row > 0,
   },
   [Masking.CLS]: {
@@ -142,20 +126,16 @@ const maskingFunctions: MaskingFunctions = {
     [Face.B]: (row, _col, _cubeSize) => row > 0,
   },
   [Masking.CMLL]: {
-    [Face.U]: (row, col, cubeSize) =>
-      (row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1),
+    [Face.U]: (row, col, cubeSize) => (row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1),
     [Face.D]: (_row, _col, _cubeSize) => true,
-    [Face.R]: (row, col, cubeSize) =>
-      row > 0 || col == 0 || col == cubeSize - 1,
-    [Face.L]: (row, col, cubeSize) =>
-      row > 0 || col == 0 || col == cubeSize - 1,
+    [Face.R]: (row, col, cubeSize) => row > 0 || col == 0 || col == cubeSize - 1,
+    [Face.L]: (row, col, cubeSize) => row > 0 || col == 0 || col == cubeSize - 1,
     [Face.F]: (_row, col, cubeSize) => col == 0 || col == cubeSize - 1,
     [Face.B]: (_row, col, cubeSize) => col == 0 || col == cubeSize - 1,
   },
   [Masking.CROSS]: {
     [Face.U]: (_row, _col, _cubeSize) => false,
-    [Face.D]: (row, col, cubeSize) =>
-      !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
+    [Face.D]: (row, col, cubeSize) => !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
     [Face.R]: (row, col, cubeSize) => row > 0 && col > 0 && col < cubeSize - 1,
     [Face.L]: (row, col, cubeSize) => row > 0 && col > 0 && col < cubeSize - 1,
     [Face.F]: (row, col, cubeSize) => row > 0 && col > 0 && col < cubeSize - 1,
@@ -163,9 +143,8 @@ const maskingFunctions: MaskingFunctions = {
   },
   [Masking.F2L3]: {
     [Face.U]: (_row, _col, _cubeSize) => false,
-    [Face.D]: (row, col, cubeSize) =>
-      (row == 0 && col == cubeSize - 1) ||
-      !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
+    [Face.D]: (row, col, cubeSize) => (row == 0 && col == cubeSize - 1)
+      || !((row == 0 || row == cubeSize - 1) && (col == 0 || col == cubeSize - 1)),
     [Face.R]: (row, col, cubeSize) => row > 0 && col < cubeSize - 1,
     [Face.L]: (row, col, cubeSize) => row > 0 && col > 0 && col < cubeSize - 1,
     [Face.F]: (row, col, _cubeSize) => row > 0 && col > 0,
@@ -173,8 +152,7 @@ const maskingFunctions: MaskingFunctions = {
   },
   [Masking.F2L2]: {
     [Face.U]: (_row, _col, _cubeSize) => false,
-    [Face.D]: (row, col, cubeSize) =>
-      row > 0 || (col > 0 && col < cubeSize - 1),
+    [Face.D]: (row, col, cubeSize) => row > 0 || (col > 0 && col < cubeSize - 1),
     [Face.R]: (row, col, _cubeSize) => row > 0 && col > 0,
     [Face.L]: (row, col, cubeSize) => row > 0 && col < cubeSize - 1,
     [Face.F]: (row, col, cubeSize) => row > 0 && col > 0 && col < cubeSize - 1,
@@ -182,13 +160,12 @@ const maskingFunctions: MaskingFunctions = {
   },
   [Masking.F2LSM]: {
     [Face.U]: (_row, _col, _cubeSize) => false,
-    [Face.D]: (row, col, cubeSize) =>
-      !(
-        (row == 0 || row == cubeSize - 1) &&
-        (col == 0 || col == cubeSize - 1)
-      ) ||
-      (col == 0 && row == cubeSize - 1) ||
-      (row == 0 && col == cubeSize - 1),
+    [Face.D]: (row, col, cubeSize) => !(
+      (row == 0 || row == cubeSize - 1)
+        && (col == 0 || col == cubeSize - 1)
+    )
+      || (col == 0 && row == cubeSize - 1)
+      || (row == 0 && col == cubeSize - 1),
     [Face.R]: (row, col, cubeSize) => row > 0 && col < cubeSize - 1,
     [Face.L]: (row, col, cubeSize) => row > 0 && col < cubeSize - 1,
     [Face.F]: (row, col, _cubeSize) => row > 0 && col > 0,
@@ -207,10 +184,8 @@ const maskingFunctions: MaskingFunctions = {
     [Face.D]: (_row, col, cubeSize) => col == 0 || col == cubeSize - 1,
     [Face.R]: (row, _col, _cubeSize) => row > 0,
     [Face.L]: (row, _col, _cubeSize) => row > 0,
-    [Face.F]: (row, col, cubeSize) =>
-      row > 0 && (col == 0 || col == cubeSize - 1),
-    [Face.B]: (row, col, cubeSize) =>
-      row > 0 && (col == 0 || col == cubeSize - 1),
+    [Face.F]: (row, col, cubeSize) => row > 0 && (col == 0 || col == cubeSize - 1),
+    [Face.B]: (row, col, cubeSize) => row > 0 && (col == 0 || col == cubeSize - 1),
   },
   [Masking.LINE]: {
     [Face.U]: (_row, _col, _cubeSize) => false,
@@ -227,8 +202,8 @@ export function makeMasking(masking: Masking, cubeSize: number): FaceValues {
     throw new Error(`invalid masking ${masking}`);
   }
 
-  let numStickers = cubeSize * cubeSize;
-  let faceValues: FaceValues = {
+  const numStickers = cubeSize * cubeSize;
+  const faceValues: FaceValues = {
     [Face.U]: [],
     [Face.F]: [],
     [Face.R]: [],
@@ -238,12 +213,12 @@ export function makeMasking(masking: Masking, cubeSize: number): FaceValues {
   };
 
   for (let i = 0; i < numStickers; i++) {
-    let row = Math.floor(i / cubeSize);
-    let col = i % cubeSize;
+    const row = Math.floor(i / cubeSize);
+    const col = i % cubeSize;
 
     AllFaces.forEach((face) => {
       faceValues[face].push(
-        maskingFunctions[masking][face](row, col, cubeSize)
+        maskingFunctions[masking][face](row, col, cubeSize),
       );
     });
   }
