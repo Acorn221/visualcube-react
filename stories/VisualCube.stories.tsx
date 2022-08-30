@@ -1,6 +1,9 @@
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Meta, Story } from '@storybook/react';
-import { Face, ICubeOptions, VisualCube, VisualCubeProps, Masking, Axis } from '../src';
+import {
+  Face, ICubeOptions, VisualCube, VisualCubeProps, Masking, Axis,
+} from '../src';
 
 const defaultOptions: ICubeOptions = {
   cubeSize: 3,
@@ -17,16 +20,16 @@ const meta: Meta = {
       name: 'Options',
       description: 'Options for the cube object',
       defaultValue: defaultOptions,
-    }
+    },
   },
   parameters: {
-    controls: { expanded: true,  },
+    controls: { expanded: true },
   },
 };
 
 export default meta;
 
-const Template: Story<VisualCubeProps> = args => <VisualCube {...args} />;
+const Template: Story<VisualCubeProps> = (args) => <VisualCube {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
@@ -37,7 +40,7 @@ Default.args = {
   options: {
     ...defaultOptions,
     algorithm: '',
-  }
+  },
 };
 
 export const AlternateView = Template.bind({});
@@ -49,7 +52,7 @@ AlternateView.args = {
   },
 };
 
-export const AlternateDistance =  Template.bind({});
+export const AlternateDistance = Template.bind({});
 
 AlternateDistance.args = {
   options: {
@@ -71,7 +74,7 @@ CustomColourScheme.args = {
       [Face.F]: '#444dbb',
       [Face.D]: '#c7cbcc',
       [Face.L]: '#eabd3d',
-      [Face.B]: '#2bd52a'
+      [Face.B]: '#2bd52a',
     },
   },
 };
@@ -102,7 +105,7 @@ Rotation.args = {
     ...defaultOptions,
     viewportRotations: [
       [Axis.X, 130],
-      [Axis.Y, -38]
+      [Axis.Y, -38],
     ],
     algorithm: '',
   },
@@ -137,11 +140,11 @@ WithArrows.args = {
         s3: { face: Face.R, n: 0 },
         scale: 8,
         influence: 5,
-        color: 'yellow'
+        color: 'yellow',
       },
     ],
     ...defaultOptions,
-  }
+  },
 };
 
 export const StickerColors = Template.bind({});
@@ -149,7 +152,7 @@ export const StickerColors = Template.bind({});
 /**
  * Generates a random sticker colour (all above 127 to make them a little brighter)
  */
-const randStickerColours = [...Array(54).keys()].map(() => `#${Math.floor((Math.random()*8388607)+8388607).toString(16)}`);
+const randStickerColours = [...Array(54).keys()].map(() => `#${Math.floor((Math.random() * 8388607) + 8388607).toString(16)}`);
 
 StickerColors.args = {
   options: {

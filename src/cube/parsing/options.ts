@@ -8,7 +8,18 @@ import { parseFaceletDefinitions } from './faceletDefinitions';
  * Utility methods for parsing the old query param style options
  */
 
-export function parseOptions(rawOptions: string): ICubeOptions {
+const parseQuery = (url: string) => {
+  const queryString = url.indexOf('?') > -1 ? url.substr(url.indexOf('?') + 1) : url;
+  const query = {};
+  const pairs = queryString.split('&');
+  for (let i = 0; i < pairs.length; i++) {
+    const pair = pairs[i].split('=');
+    query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+  }
+  return query;
+};
+
+const parseOptions = (rawOptions: string): ICubeOptions => {
   const options: ICubeOptions = {} as any;
   const params = parseQuery(rawOptions);
 
@@ -16,10 +27,10 @@ export function parseOptions(rawOptions: string): ICubeOptions {
     const paramValue = params[key];
     switch (key) {
       case 'pzl':
-        options.cubeSize = parseInt(paramValue) || 3;
+        options.cubeSize = parseInt(paramValue, 10) || 3;
         break;
       case 'size':
-        const size = parseInt(paramValue) || 250;
+        const size = parseInt(paramValue, 10) || 250;
         options.width = size;
         options.height = size;
         break;
@@ -51,13 +62,13 @@ export function parseOptions(rawOptions: string): ICubeOptions {
         options.cubeColor = paramValue;
         break;
       case 'co':
-        options.cubeOpacity = parseInt(paramValue) || 100;
+        options.cubeOpacity = parseInt(paramValue, 10) || 100;
         break;
       case 'fo':
-        options.stickerOpacity = parseInt(paramValue) || 100;
+        options.stickerOpacity = parseInt(paramValue, 10) || 100;
         break;
       case 'dist':
-        options.dist = parseInt(paramValue) || 5;
+        options.dist = parseInt(paramValue, 10) || 5;
         break;
       case 'arw':
         options.arrows = paramValue;
@@ -72,15 +83,6 @@ export function parseOptions(rawOptions: string): ICubeOptions {
     }
   });
   return options;
-}
+};
 
-function parseQuery(url) {
-  const queryString = url.indexOf('?') > -1 ? url.substr(url.indexOf('?') + 1) : url;
-  const query = {};
-  const pairs = queryString.split('&');
-  for (let i = 0; i < pairs.length; i++) {
-    const pair = pairs[i].split('=');
-    query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
-  }
-  return query;
-}
+export default parseOptions;

@@ -111,11 +111,14 @@ export function makeFaceStickers(
  * for drawing svg polygons
  */
 export function makeCubeGeometry(options: ICubeOptionsComplete): CubeGeometry {
+  const optionsEdited = options;
+
   if (options.view === 'plan') {
-    options.viewportRotations = [[Axis.X, -90]];
+    optionsEdited.viewportRotations = [[Axis.X, -90]];
   }
+
   return AllFaces.reduce((acc, face) => {
-    acc[face] = makeFaceStickers(face, options);
+    acc[face] = makeFaceStickers(face, optionsEdited);
     return acc;
   }, {} as CubeGeometry);
 }

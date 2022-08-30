@@ -7,7 +7,7 @@ import { renderCube } from './cube/drawing';
 import { ICubeOptions, ICubeOptionsComplete } from './cube/options';
 import { DefaultColorScheme } from './cube/constants';
 import { makeStickerColors } from './cube/stickers';
-import { parseOptions } from './cube/parsing/options';
+import parseOptions from './cube/parsing/options';
 import { parseFaceletDefinitions } from './cube/parsing/faceletDefinitions';
 
 export { Masking, Face } from './cube/constants';
@@ -36,24 +36,6 @@ const defaultOptions: ICubeOptionsComplete = {
   },
 };
 
-/**
- * This is the main method called to render a cube.
- * It takes in the incomplete options and fills the rest in.
- *
- * @param container The container to render the cube in
- * @param extraOptions The string support is here for backwards compatibility.
- */
-export function cubeSVG(container: HTMLElement | string, extraOptions?: ICubeOptions | string) {
-  if (extraOptions === void 0) {
-    extraOptions = {};
-  }
-  const options = getOptions(defaultOptions, extraOptions);
-  const geomety = makeCubeGeometry(options);
-  options.stickerColors = makeStickerColors(options);
-
-  return renderCube(container, geomety, options);
-}
-
 const getOptions = (baseOptions: ICubeOptions, extraOptions: string | ICubeOptions): ICubeOptionsComplete => {
   let parsedOptions: ICubeOptions;
   if (typeof extraOptions === 'string') {
@@ -69,6 +51,21 @@ const getOptions = (baseOptions: ICubeOptions, extraOptions: string | ICubeOptio
   // @ts-ignore: This is valid because we know that the type of baseOptions is ICubeOptionsComplete
   return { ...baseOptions, ...parsedOptions };
 };
+
+/**
+ * This is the main method called to render a cube.
+ * It takes in the incomplete options and fills the rest in.
+ *
+ * @param container The container to render the cube in
+ * @param extraOptions The string support is here for backwards compatibility.
+ */
+export function cubeSVG(container: HTMLElement | string, extraOptions?: ICubeOptions | string) {
+  const options = getOptions(defaultOptions, extraOptions || {});
+  const geomety = makeCubeGeometry(options);
+  options.stickerColors = makeStickerColors(options);
+
+  return renderCube(container, geomety, options);
+}
 
 export interface VisualCubeProps extends HTMLAttributes<HTMLDivElement> {
   /** custom content, defaults to 'the snozzberries taste like snozzberries' */

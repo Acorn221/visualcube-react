@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { Masking, Face, AllFaces } from './constants';
 
 export type FaceValues = {

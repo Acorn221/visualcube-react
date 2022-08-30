@@ -114,6 +114,7 @@
       ],
       "prefer-arrow-callback": 2,
       "linebreak-style": 0,
+      "default-case": 0,
       "no-plusplus": 0,
       "no-tabs": [
         "error",
