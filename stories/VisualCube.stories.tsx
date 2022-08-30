@@ -30,25 +30,8 @@ const Template: Story<VisualCubeProps> = args => <VisualCube {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
+
 export const Default = Template.bind({});
-
-export const AlternateView = Template.bind({});
-
-export const AlternateDistance =  Template.bind({});
-
-export const CustomColourScheme = Template.bind({});
-
-export const Transparency = Template.bind({});
-
-export const MaskingCube = Template.bind({});
-
-export const Rotation = Template.bind({});
-
-export const BigCubes = Template.bind({});
-
-export const WithArrows = Template.bind({});
-
-export const StickerColors = Template.bind({});
 
 Default.args = {
   options: {
@@ -57,12 +40,16 @@ Default.args = {
   }
 };
 
+export const AlternateView = Template.bind({});
+
 AlternateView.args = {
   options: {
     ...defaultOptions,
     view: 'plan',
   },
 };
+
+export const AlternateDistance =  Template.bind({});
 
 AlternateDistance.args = {
   options: {
@@ -72,6 +59,8 @@ AlternateDistance.args = {
     height: 350,
   },
 };
+
+export const CustomColourScheme = Template.bind({});
 
 CustomColourScheme.args = {
   options: {
@@ -87,6 +76,8 @@ CustomColourScheme.args = {
   },
 };
 
+export const Transparency = Template.bind({});
+
 Transparency.args = {
   options: {
     ...defaultOptions,
@@ -95,12 +86,16 @@ Transparency.args = {
   },
 };
 
+export const MaskingCube = Template.bind({});
+
 MaskingCube.args = {
   options: {
     ...defaultOptions,
     mask: Masking.CROSS,
   },
 };
+
+export const Rotation = Template.bind({});
 
 Rotation.args = {
   options: {
@@ -113,6 +108,8 @@ Rotation.args = {
   },
 };
 
+export const BigCubes = Template.bind({});
+
 BigCubes.args = {
   options: {
     ...defaultOptions,
@@ -120,6 +117,8 @@ BigCubes.args = {
     algorithm: 'R U Uw2 Bw\' Dw L\' F\' Lw\' Dw Lw\' B Lw2 Bw B2 U2 L\' Fw Rw D\' Rw\' Bw D\' Rw2 L2 B L2 Bw L B\' R\' F\' R\' B\' Dw2 Lw2 D2 Dw\' B Lw L\' R\' Fw Uw2 R2 Bw\' Lw\' B R L\' Dw2 F D2 Bw\' U\' Uw F\' B R\' D2 Bw2',
   },
 };
+
+export const WithArrows = Template.bind({});
 
 WithArrows.args = {
   options: {
@@ -145,6 +144,11 @@ WithArrows.args = {
   }
 };
 
+export const StickerColors = Template.bind({});
+
+/**
+ * Generates a random sticker colour (all above 127 to make them a little brighter)
+ */
 const randStickerColours = [...Array(54).keys()].map(() => `#${Math.floor((Math.random()*8388607)+8388607).toString(16)}`);
 
 StickerColors.args = {
