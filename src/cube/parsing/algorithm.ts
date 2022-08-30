@@ -90,7 +90,7 @@ function getTurnType(rawType: string): TurnType {
  *
  * https://www.worldcubeassociation.org/regulations/#article-12-notation
  */
- export function parseAlgorithm(algorithm: string): Turn[] {
+export function parseAlgorithm(algorithm: string): Turn[] {
   if (!algorithm) {
     return [];
   }
