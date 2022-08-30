@@ -4,9 +4,8 @@ import { Face, ICubeOptions, VisualCube, VisualCubeProps, Masking, Axis } from '
 
 const defaultOptions: ICubeOptions = {
   cubeSize: 3,
-  algorithm: 'M2 E2 S2',
-  height: 300,
-  width: 300,
+  height: 256,
+  width: 256,
 };
 
 const meta: Meta = {
@@ -16,7 +15,6 @@ const meta: Meta = {
     options: {
       name: 'Options',
       description: 'Options for the cube object',
-      defaultValue: defaultOptions,
     }
   },
   parameters: {
@@ -50,23 +48,27 @@ export const WithArrows = Template.bind({});
 
 export const StickerColors = Template.bind({});
 
-Default.args = {
-  options: {
-    ...defaultOptions,
-    algorithm: '',
-  }
-};
+/**
+ * The standard cube
+ */
+Default.args = {};
 
+/**
+ * The cube with an alternate view
+ * The 'plan' view is currently the only alternate view
+ */
 AlternateView.args = {
   options: {
     ...defaultOptions,
     view: 'plan',
+    algorithm: 'M2 E2 S2',
   },
 };
 
 AlternateDistance.args = {
   options: {
     ...defaultOptions,
+    algorithm: 'M2 E2 S2',
     dist: 2,
     width: 300,
     height: 350,
@@ -76,6 +78,7 @@ AlternateDistance.args = {
 CustomColourScheme.args = {
   options: {
     ...defaultOptions,
+    algorithm: 'M2 E2 S2',
     colorScheme: {
       [Face.U]: '#cfcf30',
       [Face.R]: '#d73b28',
@@ -90,6 +93,7 @@ CustomColourScheme.args = {
 Transparency.args = {
   options: {
     ...defaultOptions,
+    algorithm: 'M2 E2 S2',
     cubeOpacity: 50,
     stickerOpacity: 50,
   },
@@ -109,7 +113,6 @@ Rotation.args = {
       [Axis.X, 130],
       [Axis.Y, -38]
     ],
-    algorithm: '',
   },
 };
 
@@ -124,6 +127,7 @@ BigCubes.args = {
 WithArrows.args = {
   options: {
     cubeSize: 3,
+    algorithm: 'M2 E2 S2',
     arrows: [
       {
         s1: { face: Face.U, n: 0 },

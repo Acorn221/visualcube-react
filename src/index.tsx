@@ -18,8 +18,8 @@ export { ICubeOptions } from './cube/options'
 
 const defaultOptions: ICubeOptionsComplete = {
   cubeSize: 3,
-  width: 128,
-  height: 128,
+  width: 256,
+  height: 256,
   viewportRotations: [[Axis.Y, 45], [Axis.X, -34]],
   colorScheme: DefaultColorScheme,
   cubeColor: ColorName.Black,
@@ -72,7 +72,7 @@ export interface VisualCubeProps extends HTMLAttributes<HTMLDivElement> {
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
 /**
- * A custom Thing component. Neat!
+ * Visual Cube - For React
  */
 // : FC<VisualCubeProps> 
 export const VisualCube =  ({options}: VisualCubeProps) => {

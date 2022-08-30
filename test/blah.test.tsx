@@ -1,11 +1,9 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Default as Thing } from '../stories/Thing.stories';
+import { Default as VisualCube } from '../stories/VisualCube.stories';
+import { render } from '@testing-library/react'
 
 describe('Thing', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Thing />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    render(<VisualCube />)
   });
 });

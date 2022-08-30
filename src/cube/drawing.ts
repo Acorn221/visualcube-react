@@ -1,6 +1,6 @@
 import { ColorCode, ColorName } from './../colors';
 import { FaceletToFace, FaceletToColor } from './../constants';
-import SVG from 'svg.js';
+import { SVG as draw, extend as SVGextend, Element as SVGElement } from '@svgdotjs/svg.js'
 import {
   CubeGeometry,
   FaceStickers,
@@ -37,7 +37,7 @@ export const renderCube = (
     options.viewportRotations
   );
   let renderOrder = getRenderOrder(faceRotations);
-  let svg = SVG(container as HTMLElement).size(options.width, options.height);
+  let svg = draw().addTo(container as HTMLElement).size(options.width, options.height);
   svg.viewbox(
     options.viewbox.x,
     options.viewbox.y,
@@ -52,7 +52,7 @@ export const renderCube = (
     faceVisible(face, faceRotations)
   );
 
-  let cubeOutlineGroup: SVG.G;
+  let cubeOutlineGroup: SVGElement;
 
   renderBackground(svg, options);
   // Render hidden faces if cube color has transparency
@@ -103,7 +103,7 @@ const getRenderOrder = (faceRotations: FaceRotations): Face[] => {
   });
 }
 
-const renderBackground = (svg: SVG.Doc, options: ICubeOptionsComplete) => {
+const renderBackground = (svg: SVG, options: ICubeOptionsComplete) => {
   let backgroundSvg = svg.rect(options.viewbox.width, options.viewbox.height);
   backgroundSvg.x(options.viewbox.x);
   backgroundSvg.y(options.viewbox.y);
@@ -124,7 +124,7 @@ function faceVisible(face: Face, rotations: FaceRotations) {
 function getCubeOutlineGroup(
   svg: SVG.Doc,
   options: ICubeOptionsComplete
-): SVG.G {
+): SVGElement {
   let cubeOutlineGroup = svg.group();
   cubeOutlineGroup.opacity(options.cubeOpacity / 100);
   cubeOutlineGroup.attr({
@@ -134,7 +134,7 @@ function getCubeOutlineGroup(
   return cubeOutlineGroup;
 }
 
-function getOllLayerGroup(svg: SVG.Doc, options: ICubeOptionsComplete): SVG.G {
+function getOllLayerGroup(svg: SVG.Doc, options: ICubeOptionsComplete): SVGElement {
   let group = svg.group();
   group.opacity(options.stickerOpacity / 100);
   group.attr({
@@ -145,7 +145,7 @@ function getOllLayerGroup(svg: SVG.Doc, options: ICubeOptionsComplete): SVG.G {
   return group;
 }
 
-function getArrowGroup(svg: SVG.Doc, cubeSize: number): SVG.G {
+function getArrowGroup(svg: SVG.Doc, cubeSize: number): SVGElement {
   let arrowGroup = svg.group();
   arrowGroup.attr({
     opacity: 1,
@@ -157,7 +157,7 @@ function getArrowGroup(svg: SVG.Doc, cubeSize: number): SVG.G {
 }
 
 function renderCubeOutline(
-  svg: SVG.G,
+  svg: SVGElement,
   face: FaceStickers,
   options: ICubeOptionsComplete
 ): SVG.Polygon {
@@ -169,18 +169,18 @@ function renderCubeOutline(
     [face[cubeSize][cubeSize][0] * width, face[cubeSize][cubeSize][1] * width],
     [face[0][cubeSize][0] * width, face[0][cubeSize][1] * width],
   ];
-  let polygon = svg.polygon(outlinePoints);
+  let polygon = draw.polygon(outlinePoints);
   polygon.fill(options.cubeColor);
   polygon.stroke(options.cubeColor);
   return polygon;
 }
 
 function renderFaceStickers(
-  svg: SVG.Doc,
+  svg: SVGElement,
   face: Face,
   stickers: FaceStickers,
   options: ICubeOptionsComplete
-): SVG.G {
+): SVGElement {
   const cubeSize = stickers.length - 1;
   let group = svg.group();
   group.opacity(options.stickerOpacity / 100);
@@ -215,7 +215,7 @@ function renderFaceStickers(
 }
 
 function renderSticker(
-  g: SVG.G,
+  g: SVGElement,
   p1: Vec3,
   p2: Vec3,
   p3: Vec3,
@@ -294,7 +294,7 @@ function getStickerColor(
 
 // Renders the top rim of the R U L and B faces out from side of cube
 export function renderOLLStickers(
-  group: SVG.G,
+  group: SVGElement,
   face: Face,
   stickers: FaceStickers,
   rotations: FaceRotations,
@@ -327,7 +327,7 @@ export function renderOLLStickers(
  * Generates svg for an arrow pointing from sticker s1 to s2
  */
 export function renderArrow(
-  group: SVG.G,
+  group: SVGElement,
   geometry: CubeGeometry,
   arrow: Arrow
 ) {
