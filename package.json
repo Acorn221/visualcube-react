@@ -3,6 +3,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "homepage": "https://github.com/Acorn221/visualcube-react",
   "files": [
     "dist",
     "src"
@@ -20,6 +21,8 @@
     "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "predeploy": "build-storybook",
+    "deploy": "gh-pages -d storybook-static",
     "pretty": "prettier --write \"src/**/*.ts\""
   },
   "peerDependencies": {
@@ -65,6 +68,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
+    "gh-pages": "^4.0.0",
     "graceful-fs": "^4.2.10",
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
