@@ -140,8 +140,8 @@ function getStickerColor(
 
     const fd = options.facelets[colorIndex];
     if (FaceletToFace[fd] != null) {
-      const face = FaceletToFace[fd];
-      return options.colorScheme[face];
+      const faceletFace = FaceletToFace[fd];
+      return options.colorScheme[faceletFace];
     }
     if (fd !== 'o' && fd !== 'n' && fd !== 't') {
       return ColorCode.DarkGray;
