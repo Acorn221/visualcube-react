@@ -39,7 +39,7 @@ export class Arrow {
 
   outlineColor: string;
 
-  outlineWidth: number = 0.05;
+  outlineWidth: number = 0.03;
 
   outlineOpacity: number = 1;
 
