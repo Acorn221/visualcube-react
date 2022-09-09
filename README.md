@@ -10,9 +10,9 @@
 # TODO
 
   - [ ] Finish implementing all options from the cride's version
-    - [ ] Configurable default arrow color
+    - [ ] Arrow outlines
     - [ ] Facelet Definition (Defines the cube state in terms of facelet positions)
-  - [ ] Masking before and after algorithms have been applied
+  - [/] Masking before and after algorithms have been applied
 
 Fork of [VisualCube](https://github.com/Cride5/visualcube), a great Rubik's cube svg image generator. This version is a javascript library that can be used to embed Rubik's cube images in a page, without pre-rendering an image server side.
 
