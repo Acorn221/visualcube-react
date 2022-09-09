@@ -295,7 +295,7 @@ export function renderArrow(
     const outlineHeadSvg = group.path('M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z');
     outlineHeadSvg.attr({
       transform: `translate(${p2[0]},${p2[1]}) scale(${
-        (0.033 / cubeSize) + (arrow.width / 25) + (arrow.outlineWidth / 30)
+        (0.033 / cubeSize) + (arrow.width / 10) + (arrow.outlineWidth / 30)
       }) rotate(${rotation})`,
     });
     outlineHeadSvg.fill('none');
@@ -323,7 +323,7 @@ export function renderArrow(
   const headSvg = group.path('M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z');
   headSvg.attr({
     transform: `translate(${p2[0]},${p2[1]}) scale(${
-      (0.033 / cubeSize) + (arrow.width / 25)
+      (0.033 / cubeSize) + (arrow.width / 10)
     }) rotate(${rotation})`,
   });
 
