@@ -277,6 +277,35 @@ export function renderArrow(
     rotation = p_[0] > p2[0] ? rotation + 180 : rotation;
   }
 
+  if (arrow.outline) {
+    // Draw line outline
+    const outlineLineSvg = group.path(
+      `M ${p1[0]},${p1[1]} ${p3 ? `Q ${p3[0]},${p3[1]}` : 'L'} ${p2[0]},${
+        p2[1]
+      }`,
+    );
+    outlineLineSvg.fill('none');
+    outlineLineSvg.stroke({
+      color: arrow.outlineColor,
+      opacity: arrow.outlineOpacity,
+      width: arrow.width + arrow.outlineWidth,
+    });
+
+    // Draw arrow head
+    const outlineHeadSvg = group.path('M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z');
+    outlineHeadSvg.attr({
+      transform: `translate(${p2[0]},${p2[1]}) scale(${
+        (0.033 / cubeSize) + (arrow.width / 25) + (arrow.outlineWidth / 30)
+      }) rotate(${rotation})`,
+    });
+    outlineHeadSvg.fill('none');
+    outlineHeadSvg.stroke({
+      color: arrow.outlineColor,
+      opacity: arrow.outlineOpacity,
+      width: arrow.width + arrow.outlineWidth * 50, // 30 is an arbitrary scaling factor, but it looks good
+    });
+  }
+
   // Draw line
   const lineSvg = group.path(
     `M ${p1[0]},${p1[1]} ${p3 ? `Q ${p3[0]},${p3[1]}` : 'L'} ${p2[0]},${
@@ -286,19 +315,21 @@ export function renderArrow(
   lineSvg.fill('none');
   lineSvg.stroke({
     color: arrow.color,
-    opacity: 1,
+    opacity: arrow.opacity,
+    width: arrow.width,
   });
 
   // Draw arrow head
   const headSvg = group.path('M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z');
   headSvg.attr({
     transform: `translate(${p2[0]},${p2[1]}) scale(${
-      0.033 / cubeSize
+      (0.033 / cubeSize) + (arrow.width / 25)
     }) rotate(${rotation})`,
   });
 
   headSvg.style({
     fill: arrow.color,
+    opacity: arrow.opacity,
   });
   headSvg.attr({
     'stroke-width': 0,
@@ -405,7 +436,7 @@ export const renderCube = (
     arrowDefinitions = parseArrows(options.arrows);
   }
 
-  arrowDefinitions.forEach((arrow) => {
+  arrowDefinitions.map((opts) => new Arrow(opts)).forEach((arrow) => {
     renderArrow(arrowGroup, geometry, arrow);
   });
 
