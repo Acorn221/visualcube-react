@@ -164,11 +164,12 @@ export const CustomArrows = Template.bind({});
 
 CustomArrows.args = {
   options: {
-    cubeSize: 3,
+    ...defaultOptions,
+    cubeSize: 4,
     arrows: [
       {
-        s1: { face: Face.U, n: 2 },
-        s2: { face: Face.U, n: 6 },
+        s1: { face: Face.U, n: 3 },
+        s2: { face: Face.U, n: 12 },
         s3: { face: Face.U, n: 0 },
         scale: 8,
         influence: 3,
@@ -176,8 +177,8 @@ CustomArrows.args = {
         color: '#FF0000',
       },
       {
-        s1: { face: Face.R, n: 6 },
-        s2: { face: Face.R, n: 2 },
+        s1: { face: Face.R, n: 12 },
+        s2: { face: Face.R, n: 3 },
         s3: { face: Face.R, n: 0 },
         scale: 8,
         influence: 5,
@@ -186,7 +187,7 @@ CustomArrows.args = {
       },
       {
         s1: { face: Face.F, n: 0 },
-        s2: { face: Face.F, n: 8 },
+        s2: { face: Face.F, n: 15 },
         scale: 8,
         color: '#AFAFAF',
         outlineColor: '#FF0000',
@@ -196,7 +197,6 @@ CustomArrows.args = {
         outline: true,
       },
     ],
-    ...defaultOptions,
   },
 };
 
