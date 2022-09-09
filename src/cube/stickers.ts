@@ -1,15 +1,38 @@
 import { ColorName, ColorCode } from '../colors';
 import { ICubeOptionsComplete } from './options';
-import { makeMasking } from './masking';
+import { FaceValues, makeMasking } from './masking';
 import { CubeData } from './simulation';
 import { parseAlgorithm, parseCase, Turn } from './parsing/algorithm';
-import { AllFaces, Masking } from './constants';
+import { AllFaces } from './constants';
 
-const applyMask = (options: ICubeOptionsComplete, cube: CubeData, mask: Masking) => {
-  if(!options.mask) return;
-  cube.faces = cube.faces.map(face => {
-
-  });
+/**
+ * This applies the mask to the cube.
+ *
+ * @param options The options for the cube.
+ * @param cube The cube data.
+ * @param mask The facevalues for the mask.
+ * @param maskColor The color of the mask.
+ */
+const applyMask = (options: ICubeOptionsComplete, cube: CubeData, mask: FaceValues, maskColor: string) => {
+  // if there is no mask, return the cube
+  if (!options.mask) return;
+  // this maps the mask to the cube
+  // eslint-disable-next-line no-param-reassign
+  cube.faces = Object.keys(cube.faces).map((face: string) => {
+    const newFace = cube.faces[face];
+    for (let i = 0; i < options.cubeSize; i++) {
+      for (let j = 0; j < options.cubeSize; j++) {
+        if (!mask[face][options.cubeSize * i + j]) {
+          newFace[options.cubeSize * i + j] = maskColor;
+        }
+      }
+    }
+    return { newFace, face };
+  }).reduce((faces, obj) => {
+    // eslint-disable-next-line no-param-reassign
+    faces[obj.face] = obj.newFace;
+    return faces;
+  }, {});
 };
 
 // TODO: Cognitive Complexity is 25, needs to be reduced!
@@ -56,18 +79,14 @@ export function makeStickerColors(options: ICubeOptionsComplete): string[] {
         } else {
           acc[face][options.cubeSize * i + j] = stickerColors[colorIndex];
         }
-
-        if (mask && !mask[face][options.cubeSize * i + j]) {
-          acc[face][options.cubeSize * i + j] = maskColor;
-        }
       }
     }
     return acc;
   }, {});
 
-  console.log('FaceMappedStickers: ', faceMappedStickers);
-  //  ------------- Apply Algorithm -------------
   const cubeData = new CubeData(options.cubeSize, faceMappedStickers);
+  if (options.maskBeforeAlgorithm) applyMask(options, cubeData, mask, maskColor);
+  //  ------------- Apply Algorithm -------------
 
   let alg: Turn[] = [];
 
@@ -82,7 +101,9 @@ export function makeStickerColors(options: ICubeOptionsComplete): string[] {
   });
   // ------------- Apply Algorithm -------------
 
-  //return [...AllFaces.map((face) => cubeData.faces[face])];
+  if (!options.maskBeforeAlgorithm) applyMask(options, cubeData, mask, maskColor);
+
+  // return [...AllFaces.map((face) => cubeData.faces[face])];
 
   return [].concat.apply(
     [],
