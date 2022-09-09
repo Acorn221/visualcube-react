@@ -96,6 +96,7 @@ MaskingCubeBeforeAlg.args = {
     ...defaultOptions,
     mask: Masking.F2L,
     algorithm: 'R U R',
+    maskBeforeAlgorithm: true,
   },
 };
 
@@ -106,6 +107,7 @@ MaskingCubeAfterAlg.args = {
     ...defaultOptions,
     mask: Masking.F2L,
     algorithm: 'R U R',
+    maskBeforeAlgorithm: false,
   },
 };
 
