@@ -26,6 +26,7 @@ export interface ICubeOptions {
   width?: number;
   height?: number;
   mask?: Masking;
+  maskBeforeAlgorithm?: boolean;
   maskAlg?: string;
   arrows?: Arrow[] | string;
   viewbox?: {
@@ -69,6 +70,7 @@ export interface ICubeOptionsComplete {
   facelets?: FaceletDefinition[];
   view?: string;
   mask?: Masking;
+  maskBeforeAlgorithm?: boolean;
   maskAlg?: string;
   arrows?: Arrow[] | string;
 }

@@ -89,12 +89,23 @@ Transparency.args = {
   },
 };
 
-export const MaskingCube = Template.bind({});
+export const MaskingCubeBeforeAlg = Template.bind({});
 
-MaskingCube.args = {
+MaskingCubeBeforeAlg.args = {
   options: {
     ...defaultOptions,
-    mask: Masking.CROSS,
+    mask: Masking.F2L,
+    algorithm: 'R U R',
+  },
+};
+
+export const MaskingCubeAfterAlg = Template.bind({});
+
+MaskingCubeAfterAlg.args = {
+  options: {
+    ...defaultOptions,
+    mask: Masking.F2L,
+    algorithm: 'R U R',
   },
 };
 

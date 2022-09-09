@@ -34,6 +34,7 @@ const defaultOptions: ICubeOptionsComplete = {
     width: 1.8,
     height: 1.8,
   },
+  maskBeforeAlgorithm: true,
 };
 
 const getOptions = (baseOptions: ICubeOptions, extraOptions: string | ICubeOptions): ICubeOptionsComplete => {
