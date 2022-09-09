@@ -124,16 +124,15 @@ function getStickerColor(
   const stickerNumber = row * options.cubeSize + col;
   const colorIndex = faceIndex * (options.cubeSize * options.cubeSize) + stickerNumber;
 
-  if (
-    !Array.isArray(options.facelets)
-    && Array.isArray(options.stickerColors)
-  ) {
+  if (!Array.isArray(options.facelets) && Array.isArray(options.stickerColors)) {
     if (options.stickerColors.length <= colorIndex) {
       return ColorName.Black;
     }
 
     return options.stickerColors[colorIndex];
-  } if (Array.isArray(options.facelets)) {
+  }
+
+  if (Array.isArray(options.facelets)) {
     if (options.facelets.length <= colorIndex) {
       return ColorCode.DarkGray;
     }
@@ -270,20 +269,20 @@ export function renderArrow(
   }
 
   // Calculate arrow rotation
-  const p_ = p3 || p1;
-  let rotation = p_[1] > p2[1] ? 270 : 90;
-  if (p2[0] - p_[0] != 0) {
-    rotation = radians2Degrees(Math.atan((p2[1] - p_[1]) / (p2[0] - p_[0])));
-    rotation = p_[0] > p2[0] ? rotation + 180 : rotation;
+  const pR = p3 || p1;
+  let rotation = pR[1] > p2[1] ? 270 : 90;
+  if (p2[0] - pR[0] !== 0) {
+    rotation = radians2Degrees(Math.atan((p2[1] - pR[1]) / (p2[0] - pR[0])));
+    rotation = pR[0] > p2[0] ? rotation + 180 : rotation;
   }
+
+  const lineMid = p3 ? `Q ${p3[0]},${p3[1]}` : 'L';
+  const linePath = `M ${p1[0]},${p1[1]} ${lineMid} ${p2[0]},${p2[1]}`;
+  const headPath = 'M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z';
 
   if (arrow.outline) {
     // Draw line outline
-    const outlineLineSvg = group.path(
-      `M ${p1[0]},${p1[1]} ${p3 ? `Q ${p3[0]},${p3[1]}` : 'L'} ${p2[0]},${
-        p2[1]
-      }`,
-    );
+    const outlineLineSvg = group.path(linePath);
     outlineLineSvg.fill('none');
     outlineLineSvg.stroke({
       color: arrow.outlineColor,
@@ -292,7 +291,7 @@ export function renderArrow(
     });
 
     // Draw arrow head
-    const outlineHeadSvg = group.path('M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z');
+    const outlineHeadSvg = group.path(headPath);
     outlineHeadSvg.attr({
       transform: `translate(${p2[0]},${p2[1]}) scale(${
         (0.033 / cubeSize) + (arrow.width / 10) + (arrow.outlineWidth / 30)
@@ -307,11 +306,7 @@ export function renderArrow(
   }
 
   // Draw line
-  const lineSvg = group.path(
-    `M ${p1[0]},${p1[1]} ${p3 ? `Q ${p3[0]},${p3[1]}` : 'L'} ${p2[0]},${
-      p2[1]
-    }`,
-  );
+  const lineSvg = group.path(linePath);
   lineSvg.fill('none');
   lineSvg.stroke({
     color: arrow.color,
@@ -320,7 +315,7 @@ export function renderArrow(
   });
 
   // Draw arrow head
-  const headSvg = group.path('M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z');
+  const headSvg = group.path(headPath);
   headSvg.attr({
     transform: `translate(${p2[0]},${p2[1]}) scale(${
       (0.033 / cubeSize) + (arrow.width / 10)
