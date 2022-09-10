@@ -1,4 +1,4 @@
-# VisualCube TS
+# VisualCube-React
 <p float="left">
   <img src="https://raw.githubusercontent.com/tdecker91/visualcube/master/assets/default.png" width="125" />
   <img src="https://raw.githubusercontent.com/tdecker91/visualcube/master/assets/scramble.png" width="125" />
