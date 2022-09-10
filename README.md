@@ -19,9 +19,9 @@ This fork, of the typescript fork, is made to simplify deployment with react and
 
 # How to install
 
-  yarn add visualcube-react
+  ```yarn add visualcube-react```
   or
-  npm install visualcube-react
+  ```npm install visualcube-react```
 
 # How to run for development
 
