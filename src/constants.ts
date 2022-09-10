@@ -1,5 +1,5 @@
-import { ColorCode, ColorName, ColorAbbreviation } from './colors'
-import { Face } from './cube/constants'
+import { ColorCode, ColorName, ColorAbbreviation } from './colors';
+import { Face } from './cube/constants';
 
 export enum FaceletDefinition {
   Up = 'u',
@@ -26,7 +26,7 @@ export const ColorNameToCode: { [name: string]: ColorCode } = {
   [ColorName.Green]: ColorCode.Green,
   [ColorName.Purple]: ColorCode.Purple,
   [ColorName.Pink]: ColorCode.Pink,
-}
+};
 
 export const ColorAbbreviationToCode: { [name: string]: ColorCode } = {
   [ColorAbbreviation.Black]: ColorCode.Black,
@@ -42,9 +42,11 @@ export const ColorAbbreviationToCode: { [name: string]: ColorCode } = {
   [ColorAbbreviation.Purple]: ColorCode.Purple,
   [ColorAbbreviation.Pink]: ColorCode.Pink,
   [ColorAbbreviation.Transparent]: ColorCode.Transparent,
-}
+};
 
-export const FaceletAbbreviateToDefinition: { [facelet: string]: FaceletDefinition } = {
+export const FaceletAbbreviateToDefinition: {
+  [facelet: string]: FaceletDefinition;
+} = {
   u: FaceletDefinition.Up,
   f: FaceletDefinition.Front,
   r: FaceletDefinition.Right,
@@ -54,7 +56,7 @@ export const FaceletAbbreviateToDefinition: { [facelet: string]: FaceletDefiniti
   t: FaceletDefinition.Transparent,
   o: FaceletDefinition.Oriented,
   n: FaceletDefinition.Blank,
-}
+};
 
 export const FaceletToFace: { [facelet: string]: Face } = {
   [FaceletDefinition.Up]: Face.U,
@@ -63,10 +65,10 @@ export const FaceletToFace: { [facelet: string]: Face } = {
   [FaceletDefinition.Right]: Face.R,
   [FaceletDefinition.Front]: Face.F,
   [FaceletDefinition.Back]: Face.B,
-}
+};
 
 export const FaceletToColor = {
   [FaceletDefinition.Oriented]: ColorName.Gray,
   [FaceletDefinition.Blank]: ColorCode.DarkGray,
   [FaceletDefinition.Transparent]: ColorName.Transparent,
-}
+};

@@ -1,6 +1,6 @@
-import { ColorCode } from './../colors'
-import { Axis } from './../math'
-import { ICubeColorScheme } from './models/color-scheme'
+import { ColorCode } from '../colors';
+import { Axis } from '../math';
+import { ICubeColorScheme } from './models/color-scheme';
 
 export enum Face {
   U = 0,
@@ -11,15 +11,20 @@ export enum Face {
   B = 5,
 }
 
-export const AllFaces = [Face.U, Face.R, Face.F, Face.D, Face.L, Face.B]
+export const AllFaces = [Face.U, Face.R, Face.F, Face.D, Face.L, Face.B];
 
 export class FaceRotationVectors {
-  static U = [0, -1, 0]
-  static R = [1, 0, 0]
-  static F = [0, 0, -1]
-  static D = [0, 1, 0]
-  static L = [-1, 0, 0]
-  static B = [0, 0, 1]
+  static U = [0, -1, 0];
+
+  static R = [1, 0, 0];
+
+  static F = [0, 0, -1];
+
+  static D = [0, 1, 0];
+
+  static L = [-1, 0, 0];
+
+  static B = [0, 0, 1];
 }
 
 export const DefaultColorScheme: ICubeColorScheme = {
@@ -29,7 +34,7 @@ export const DefaultColorScheme: ICubeColorScheme = {
   [Face.D]: ColorCode.White,
   [Face.L]: ColorCode.Orange,
   [Face.B]: ColorCode.Green,
-}
+};
 
 export const JapaneseColorScheme: ICubeColorScheme = {
   [Face.U]: ColorCode.Blue,
@@ -38,7 +43,7 @@ export const JapaneseColorScheme: ICubeColorScheme = {
   [Face.D]: ColorCode.White,
   [Face.L]: ColorCode.Red,
   [Face.B]: ColorCode.Yellow,
-}
+};
 
 export enum AlgorithmUnit {
   F = 'F',
@@ -59,7 +64,7 @@ export const AxisSymbolToAxis = {
   x: Axis.X,
   y: Axis.Y,
   z: Axis.Z,
-}
+};
 
 export const possibleMoves: string[] = [
   AlgorithmUnit.F,
@@ -74,9 +79,13 @@ export const possibleMoves: string[] = [
   AlgorithmUnit.X,
   AlgorithmUnit.Y,
   AlgorithmUnit.Z,
-]
+];
 
-export const cubeRotations: string[] = [AlgorithmUnit.X, AlgorithmUnit.Y, AlgorithmUnit.Z]
+export const cubeRotations: string[] = [
+  AlgorithmUnit.X,
+  AlgorithmUnit.Y,
+  AlgorithmUnit.Z,
+];
 
 export enum TurnAbbreviation {
   Clockwise = '',
