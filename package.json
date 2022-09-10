@@ -66,6 +66,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "gh-pages": "^4.0.0",
@@ -108,7 +109,8 @@
     },
     "plugins": [
       "react",
-      "@typescript-eslint"
+      "@typescript-eslint",
+      "prefer-arrow"
     ],
     "rules": {
       "react/function-component-definition": [
@@ -116,6 +118,14 @@
         {
           "namedComponents": "arrow-function",
           "unnamedComponents": "arrow-function"
+        }
+      ],
+      "prefer-arrow/prefer-arrow-functions": [
+        "warn",
+        {
+          "disallowPrototype": true,
+          "singleReturnOnly": true,
+          "classPropertiesAllowed": false
         }
       ],
       "prefer-arrow-callback": 2,
@@ -147,7 +157,8 @@
       "react/jsx-props-no-spreading": 0,
       "react/prop-types": 0,
       "no-console": 0,
-      "no-alert": 0
+      "no-alert": 0,
+      "arrow-body-style": 2
     }
   }
 }

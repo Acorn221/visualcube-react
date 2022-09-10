@@ -20,7 +20,8 @@ const Opposite = {
 function getSlices(rawSlices, outerBlockIndicator): number {
   if (outerBlockIndicator && !rawSlices) {
     return 2;
-  } if (!outerBlockIndicator && rawSlices) {
+  }
+  if (!outerBlockIndicator && rawSlices) {
     throw new Error(
       'Invalid move: Cannot specify num slices if outer block move indicator \'w\' is not present',
     );
@@ -49,18 +50,19 @@ function getTurnType(rawType: string): TurnType {
     case TurnAbbreviation.DoubleCounter1:
     case TurnAbbreviation.DoubleCounter2:
       return TurnType.Double;
-    default:
+    default: {
       // Attempt to parse non standard turn type
       // (for invalid but reasonable moves like "y3")
       let reversed = false;
+      let processedType = rawType;
       if (rawType.charAt(0) === "'") {
         reversed = true;
-        rawType = rawType.substring(1, rawType.length);
+        processedType = rawType.substring(1, rawType.length);
       } else if (rawType.charAt(rawType.length - 1) === "'") {
         reversed = true;
       }
 
-      let turns = parseInt(rawType, 10) % 4;
+      let turns = parseInt(processedType, 10) % 4;
 
       if (Number.isNaN(turns)) {
         throw new Error(`Invalid move modifier (${rawType})`);
@@ -80,6 +82,7 @@ function getTurnType(rawType: string): TurnType {
       }
 
       return reversed ? TurnType.CounterClockwise : TurnType.Clockwise;
+    }
   }
 }
 
@@ -123,12 +126,10 @@ export function parseAlgorithm(algorithm: string): Turn[] {
   return turns;
 }
 
-export function parseCase(algorithm: string): Turn[] {
-  return parseAlgorithm(algorithm)
-    .map((turn) => <Turn>{
-      turnType: Opposite[turn.turnType],
-      move: turn.move,
-      slices: turn.slices,
-    })
-    .reverse();
-}
+export const parseCase = (algorithm: string): Turn[] => parseAlgorithm(algorithm)
+  .map((turn) => <Turn>{
+    turnType: Opposite[turn.turnType],
+    move: turn.move,
+    slices: turn.slices,
+  })
+  .reverse();
