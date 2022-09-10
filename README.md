@@ -19,14 +19,16 @@ This fork, of the typescript fork, is made to simplify deployment with react and
 
 # How to install
 
-  ```yarn add visualcube-react```
+    yarn add visualcube-react
+
   or
-  ```npm install visualcube-react```
+
+    npm install visualcube-react
 
 # How to run for development
 
   1. Clone the repo
-  2. Run `yarn install`
+  2. Run `yarn`
   3. Run `yarn run storybook`
   4. Go to `http://localhost:6006/` in your browser
 
