@@ -12,6 +12,7 @@
   - [x] Refactored code
   - [x] Easy react integration
   - [x] Storybooks for easy testing and examples
+  - [x] The option to apply the mask before and after the algorithm is applied
   - [x] Arrow transparency, outlines and size configuration
 
 This fork, of the typescript fork, is made to simplify deployment with react and to simplify deployment of this library, along with making the code more readable.
