@@ -18,14 +18,6 @@
 This fork, of the typescript fork, is made to simplify deployment with react and to simplify deployment of this library, along with making the code more readable.
 [Click here to view the Storybooks Deployment](https://acorn221.github.io/visualcube-react/)
 
-# How to install
-
-    yarn add visualcube-react
-
-  or
-
-    npm install visualcube-react
-
 # How to run for development
 
   1. Clone the repo
